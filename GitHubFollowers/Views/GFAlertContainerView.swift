@@ -1,16 +1,13 @@
 //
-//  GFAvaterImageView.swift
+//  GFAlertContainerView.swift
 //  GitHubFollowers
 //
-//  Created by Abdullah Al Sohel on 4/14/22.
+//  Created by Abdullah Al Sohel on 4/27/22.
 //
 
 import UIKit
 
-class GFAvaterImageView: UIImageView {
-    
-    let cache = NetworkManager.shared.cache
-    
+class GFAlertContainerView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -20,14 +17,11 @@ class GFAvaterImageView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init() {
-        self.init(frame: .zero)
-    }
-    
     private func configure() {
-        layer.cornerRadius = 10
-        clipsToBounds = true
-        image = UIImage(named: "avatar-placeholder")
+        backgroundColor = .systemBackground
+        layer.cornerRadius = 16
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.white.cgColor
         translatesAutoresizingMaskIntoConstraints = false
     }
 }

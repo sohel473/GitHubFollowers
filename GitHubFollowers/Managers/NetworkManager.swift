@@ -23,7 +23,7 @@ class NetworkManager {
             completed(.failure(.invalidUsername))
             return
         }
-//        print(url)
+        //        print(url)
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             
             if let _ = error {
@@ -61,7 +61,7 @@ class NetworkManager {
             completed(.failure(.invalidUsername))
             return
         }
-//        print(url)
+        //        print(url)
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             
             if let _ = error {
@@ -86,6 +86,34 @@ class NetworkManager {
             } catch {
                 completed(.failure(.invalidData))
             }
+        }
+        task.resume()
+    }
+    
+    func downloadImage(from urlString: String, completed: @escaping(UIImage?) -> Void) {
+        if let image = cache.object(forKey: NSString(string: urlString)) {
+            completed(image)
+            return
+        }
+        
+        guard let url = URL(string: urlString) else {
+            completed(nil)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let self = self,
+                  error == nil,
+                  let data = data,
+                  let response = response as? HTTPURLResponse, response.statusCode == 200,
+                  let image = UIImage(data: data) else {
+                        completed(nil)
+                        return
+            }
+            
+            self.cache.setObject(image, forKey: NSString(string: urlString))
+            
+            completed(image)
         }
         task.resume()
     }

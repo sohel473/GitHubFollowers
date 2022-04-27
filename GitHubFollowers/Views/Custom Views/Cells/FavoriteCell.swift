@@ -24,7 +24,12 @@ class FavoriteCell: UITableViewCell {
     
     func set(follower: Follower) {
         usernameLabel.text = follower.login
-        avaterImageView.downloadImage(for: follower.avatar_url)
+        NetworkManager.shared.downloadImage(from: follower.avatar_url) { [weak self] image in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.avaterImageView.image = image
+            }
+        }
     }
     
     private func configure() {
