@@ -5,7 +5,6 @@
 //  Created by Abdullah Al Sohel on 4/21/22.
 //
 
-import Foundation
 import UIKit
 
 enum SFSymbols {
