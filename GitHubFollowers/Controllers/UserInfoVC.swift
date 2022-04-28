@@ -85,7 +85,7 @@ class UserInfoVC: UIViewController {
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            headerView.heightAnchor.constraint(equalToConstant: 180),
+            headerView.heightAnchor.constraint(equalToConstant: 210),
             
             itemViewOne.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
             itemViewOne.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
@@ -117,7 +117,7 @@ class UserInfoVC: UIViewController {
     }
 }
 
-extension UserInfoVC: GFItemInfoCVDelegate {
+extension UserInfoVC: GFRepoInfoVCDelegate, GFFollowerInfoDelegate {
     func didTapGithubProfile(for user: User) {
         // Show safari view controller
         guard let url = URL(string: user.html_url) else {
